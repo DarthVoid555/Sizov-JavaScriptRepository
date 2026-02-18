@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>Лаба 2, задание 2</h1>
+    <button onclick="askAge()">Проверить возраст</button>
+    
+    <script>
+        function checkAge(age) {
+            if (age < 18) {
+                alert("Привет, малыш!");
+            } else {
+                alert("Здравствуйте, юноша!");
+            }
+        }
+        
+        function askAge() {
+            let age = prompt("Сколько тебе лет?");
+            age = Number(age);
+            checkAge(age);
+        }
+    </script>
+</body>
+</html>
