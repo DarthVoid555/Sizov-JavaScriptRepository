@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h2>Лаба 3, Задание 2</h2>
+    
+    <div id="output"></div>
+    
+    <script>
+        let myBrowser = {
+            name: "Microsoft Internet Explorer",
+            version: "9.0"
+        };
+        
+        let html = "<h4>Свойства объекта myBrowser:</h4><ul>";
+        
+        for (let key in myBrowser) {
+            html += "<li><b>" + key + "</b>: " + myBrowser[key] + "</li>";
+            console.log(key + ": " + myBrowser[key]);
+        }
+        
+        html += "</ul>";
+        document.getElementById("output").innerHTML = html;
+    </script>
+</body>
+</html>

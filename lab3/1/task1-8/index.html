@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>Лаба 3, задание 8</h1>
+    
+     <div id="output"></div>
+    
+    <script>
+        function Browser(name, version) {
+            this.name = name;
+            this.version = version;
+            
+            this.aboutBrowser = function() {
+                let msg = "Браузер: " + this.name + ", версия: " + this.version;
+                console.log(msg);
+                return msg;
+            };
+        }
+        
+        let myBrowser = new Browser("Microsoft Internet Explorer", "9.0");
+        
+        let output = document.getElementById("output");
+        let html = "<h4>Свойства объекта:</h4>";
+        html += "<p>name: <b>" + myBrowser.name + "</b></p>";
+        html += "<p>version: <b>" + myBrowser.version + "</b></p>";
+        html += "<h4>Метод aboutBrowser():</h4>";
+        html += "<p>" + myBrowser.aboutBrowser() + "</p>";
+        
+        output.innerHTML = html;
+        
+        console.log("Объект myBrowser:");
+        console.log(myBrowser);
+        myBrowser.aboutBrowser();
+    </script>
+</body>
+</html>

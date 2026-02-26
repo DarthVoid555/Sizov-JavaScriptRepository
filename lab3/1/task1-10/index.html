@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>Лаба 3, задание 10</h1>
+    <div id="output"></div>
+    
+    <script>
+        function Calculator() {
+            this.a = 0;
+            this.b = 0;
+            
+            this.read = function(a, b) {
+                this.a = a;
+                this.b = b;
+            };
+            
+            this.sum = function() {
+                return this.a + this.b;
+            };
+            
+            this.mul = function() {
+                return this.a * this.b;
+            };
+        }
+        
+        let calc = new Calculator();
+        
+        function testCalc() {
+            calc.read(5, 3);
+            document.getElementById("output").innerHTML = 
+                "Сумма: " + calc.sum() + "<br>" +
+                "Произведение: " + calc.mul();
+        }
+        
+        testCalc();
+    </script>
+</body>
+</html>

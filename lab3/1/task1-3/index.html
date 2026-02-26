@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h2>Лаба 3, Задание 3</h2>
+    
+    <div id="output"></div>
+    
+    <script>
+        function isEmpty(obj) {
+            for (let key in obj) {
+                return false;
+            }
+            return true;
+        }
+        
+        let obj1 = {};
+        let obj2 = {name: "John"};
+        let obj3 = {a: 1, b: 2};
+        
+        let html = "";
+        html += "<p>{} = " + isEmpty(obj1) + "</p>";
+        html += "<p>{name: 'John'} = " + isEmpty(obj2) + "</p>";
+        html += "<p>{a: 1, b: 2} = " + isEmpty(obj3) + "</p>";
+        
+        document.getElementById("output").innerHTML = html;
+    </script>
+</body>
+</html>

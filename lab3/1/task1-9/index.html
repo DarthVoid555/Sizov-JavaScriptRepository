@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>Лаба 3, задание 9</h1>
+    
+     <div id="output"></div>
+    
+    <script>
+        function Сотрудник(имя, отдел, телефон, зарплата) {
+            this.имя = имя;
+            this.отдел = отдел;
+            this.телефон = телефон;
+            this.зарплата = зарплата;
+            
+            this.отобразить = function() {
+                return `
+                    <h3>Данные сотрудника</h3>
+                    <p><span class="label">Имя:</span> ${this.имя}</p>
+                    <p><span class="label">Отдел:</span> ${this.отдел}</p>
+                    <p><span class="label">Телефон:</span> ${this.телефон}</p>
+                    <p><span class="label">Зарплата:</span> ${this.зарплата} руб.</p>
+                `;
+            };
+        }
+        
+        let сотрудник1 = new Сотрудник(
+            "Иван Петров", 
+            "IT-отдел", 
+            "+7 (999) 123-45-67", 
+            75000
+        );
+        
+        document.getElementById("output").innerHTML = сотрудник1.отобразить();
+        
+        console.log("Сотрудник:");
+        console.log("Имя:", сотрудник1.имя);
+        console.log("Отдел:", сотрудник1.отдел);
+        console.log("Телефон:", сотрудник1.телефон);
+        console.log("Зарплата:", сотрудник1.зарплата);
+        
+        console.log("\nЧерез метод:");
+        console.log(сотрудник1.отобразить());
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>Лаба 3, задание 7</h1>
+    
+    <button onclick="testLadder()">Запустить ladder.up().up().down().showStep().down().showStep()</button>
+    
+    <div id="output" style="margin-top: 20px;"></div>
+    
+    <script>
+        let ladder = {
+            step: 0,
+            
+            up() {
+                this.step++;
+                return this;
+            },
+            
+            down() {
+                this.step--;
+                return this;
+            },
+            
+            showStep() {
+                document.getElementById("output").innerHTML += 
+                    "Ступенька: " + this.step + "<br>";
+                return this;
+            }
+        };
+        
+        function testLadder() {
+            // Убираем очистку! Или если хочешь очищать - делай это здесь:
+            // document.getElementById("output").innerHTML = ""; 
+            
+            ladder.up().up().down().showStep().down().showStep();
+        }
+    </script>
+</body>
+</html>
