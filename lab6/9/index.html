@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Лицемер (с) - Динамическая версия</title>
+    <style>
+        .display {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .card {
+            height: 36vh;
+            width: 30vh;
+            margin: 20px 40px;
+            box-shadow: 0 4px 16px 0 rgba(0,0,0,0.2);
+            transition: 0.3s ease-out;
+            background-color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .card:hover {
+            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.4);
+            transform: scale(1.02, 1.02);
+        }
+        .card > img {
+            width: 30vh;
+            height: 30vh;
+            border-radius: 5px 5px 0 0;
+            object-fit: cover;
+        }
+        .description {
+            padding: 0 16px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        .description p {
+            margin: 10px 0;
+        }
+        body {
+            margin: 0;
+            font-family: 'Arimo', sans-serif;
+        }
+        body > header {
+            height: 60px;
+            background-color: #7161EF;
+        }
+        .content {
+            display: flex;
+            flex-flow: row nowrap;
+            min-height: calc(100vh - 60px);
+        }
+        .content > aside {
+            width: 30%;
+            background-color: #f0f0f0;
+        }
+        .content > section {
+            flex: 1;
+            background-color: #FFE7DB;
+        }
+        .header-d {
+            text-align: center;
+            height: 80px;
+            line-height: 80px;
+            font-size: 1.8rem;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // Пункт a
+        
+        const firstNames = ['Александр', 'Дмитрий', 'Максим', 'Иван', 'Артем', 'Екатерина', 'Анна', 'Мария', 'Ольга', 'Татьяна'];
+        const lastNames = ['Иванов', 'Петров', 'Сидоров', 'Кузнецов', 'Смирнов', 'Волков', 'Морозов', 'Новиков', 'Козлов', 'Соколов'];
+        
+        function getRandomName() {
+            const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+            const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+            return `${firstName} ${lastName}`;
+        }
+        
+        function createCard(cardNumber) {
+            const card = document.createElement('div');
+            card.className = 'card';
+            
+            const img = document.createElement('img');
+            img.src = `https://thispersondoesnotexist.com/?${cardNumber}`;
+            img.alt = 'Avatar';
+            
+            const description = document.createElement('div');
+            description.className = 'description';
+            
+            const nameParagraph = document.createElement('p');
+            nameParagraph.textContent = getRandomName();
+            
+            description.appendChild(nameParagraph);
+            card.appendChild(img);
+            card.appendChild(description);
+            
+            return card;
+        }
+        
+        function buildPageStructure() {
+            const header = document.createElement('header');
+            
+            const main = document.createElement('main');
+            main.className = 'content';
+            
+            const aside = document.createElement('aside');
+            
+            const section = document.createElement('section');
+            
+            const headerDiv = document.createElement('div');
+            headerDiv.className = 'header-d';
+            headerDiv.textContent = 'Выберите лицо, которое нравится вам больше остальных:';
+            
+            const displayDiv = document.createElement('div');
+            displayDiv.className = 'display';
+            displayDiv.id = 'cardContainer';
+            
+            section.appendChild(headerDiv);
+            section.appendChild(displayDiv);
+            
+            main.appendChild(aside);
+            main.appendChild(section);
+            
+            document.body.appendChild(header);
+            document.body.appendChild(main);
+            
+            return displayDiv;
+        }
+
+        // Пункт b: Добавление карточек через setInterval
+        
+        const cardContainer = buildPageStructure();
+        
+        let cardCount = 1;
+        let intervalId = null;
+        
+        function addCard() {
+            if (cardCount <= 6) {
+                const newCard = createCard(cardCount);
+                cardContainer.appendChild(newCard);
+                console.log(`Добавлена карточка №${cardCount} с именем: ${newCard.querySelector('p').textContent}`);
+                cardCount++;
+            }
+            
+            if (cardCount > 6) {
+                clearInterval(intervalId);
+                console.log('Достигнуто 6 карточек. Таймер остановлен.');
+            }
+        }
+        
+        intervalId = setInterval(addCard, 2000);
+        
+        console.log('Скрипт запущен. Карточки будут добавляться каждые 2 секунды...');
+    </script>
+</body>
+</html>

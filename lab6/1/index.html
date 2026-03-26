@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Лабораторная работа - Задание 6</title>
+
+</head>
+<body>
+    <div class="container">
+        <h1>Лабораторная работа 6 - Задание 1</h1>
+        <hr>
+
+        <!-- a. sin(x) -->
+        <h3>a. Вычисление sin(x)</h3>
+        <button onclick="taskA()">Вычислить sin(x)</button>
+        <hr>
+
+        <!-- b. Принадлежность точки квадрату -->
+        <h3>b. Принадлежность точки квадрату</h3>
+        <button onclick="taskB()">Проверить точку</button>
+        <hr>
+
+        <!-- c. Сумма двух квадратов -->
+        <h3>c. Представление числа в виде суммы двух квадратов</h3>
+        <button onclick="taskC()">Проверить число</button>
+        <hr>
+
+        <!-- d. Проверка email на @ -->
+        <h3>d. Проверка email</h3>
+        <button onclick="taskD()">Проверить email</button>
+        <hr>
+
+        <!-- e. Доля латинских букв -->
+        <h3>e. Доля латинских букв в строке</h3>
+        <button onclick="taskE()">Посчитать</button>
+        <hr>
+
+        <!-- f. Удаление повторных вхождений слов -->
+        <h3>f. Удаление повторных вхождений слов</h3>
+        <button onclick="taskF()">Обработать строку</button>
+        <hr>
+
+        <!-- g. Массив случайных чисел -->
+        <h3>g. Массив случайных чисел</h3>
+        <button onclick="taskG()">Создать массив</button>
+        <hr>
+
+        <!-- h. Матрица с диагоналями -->
+        <h3>h. Матрица с заменой диагоналей</h3>
+        <button onclick="taskH()">Создать матрицу</button>
+        <hr>
+
+        <!-- i. Прибавить n дней к дате -->
+        <h3>i. Прибавить n дней к текущей дате</h3>
+        <button onclick="taskI()">Прибавить дни</button>
+        <hr>
+
+        <!-- j. Месяцев до 1 сентября -->
+        <h3>j. Месяцев до 1 сентября</h3>
+        <button onclick="taskJ()">Посчитать</button>
+        <hr>
+    </div>
+
+    <script>
+        // a. sin(x)
+        function taskA() {
+            let x = prompt("Введите x (в радианах):", "1");
+            if (x !== null) {
+                x = parseFloat(x);
+                if (!isNaN(x)) {
+                    let result = Math.sin(x);
+                    alert(`sin(${x}) = ${result}`);
+                } else {
+                    alert("Ошибка: введите число!");
+                }
+            }
+        }
+
+        // b. Принадлежность точки квадрату
+        function taskB() {
+            let x1 = parseFloat(prompt("Введите x1 (первая вершина):"));
+            let y1 = parseFloat(prompt("Введите y1 (первая вершина):"));
+            let x2 = parseFloat(prompt("Введите x2 (вторая вершина):"));
+            let y2 = parseFloat(prompt("Введите y2 (вторая вершина):"));
+            let x = parseFloat(prompt("Введите x точки:"));
+            let y = parseFloat(prompt("Введите y точки:"));
+
+            if ([x1, y1, x2, y2, x, y].some(isNaN)) {
+                alert("Ошибка: все значения должны быть числами!");
+                return;
+            }
+
+            let left = Math.min(x1, x2);
+            let right = Math.max(x1, x2);
+            let bottom = Math.min(y1, y2);
+            let top = Math.max(y1, y2);
+
+            let belongs = (x >= left && x <= right && y >= bottom && y <= top);
+            
+            alert(`Точка (${x}, ${y}) ${belongs ? 'принадлежит' : 'НЕ принадлежит'} квадрату`);
+        }
+
+        // c. Сумма двух квадратов
+        function taskC() {
+            let n = parseInt(prompt("Введите натуральное число:"));
+            if (isNaN(n) || n < 1) {
+                alert("Ошибка: введите натуральное число!");
+                return;
+            }
+
+            let found = false;
+            let result = "";
+
+            for (let a = 0; a <= Math.sqrt(n); a++) {
+                for (let b = a; b <= Math.sqrt(n); b++) {
+                    if (a*a + b*b === n) {
+                        found = true;
+                        result += `${n} = ${a}² + ${b}²\n`;
+                    }
+                }
+            }
+
+            if (found) {
+                alert(`Можно представить:\n${result}`);
+            } else {
+                alert(`${n} нельзя представить в виде суммы двух квадратов`);
+            }
+        }
+
+        // d. Проверка email на @
+        function taskD() {
+            let email = prompt("Введите email:");
+            if (email !== null) {
+                if (email.includes('@')) {
+                    alert("✓ Email корректный (содержит @)");
+                } else {
+                    alert("✗ Ошибка: email должен содержать символ @");
+                }
+            }
+        }
+
+        // e. Доля латинских букв
+        function taskE() {
+            let s = prompt("Введите строку:");
+            if (s === null) return;
+
+            let latinCount = 0;
+            for (let char of s) {
+                if ((char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z')) {
+                    latinCount++;
+                }
+            }
+
+            let percent = (latinCount / s.length * 100).toFixed(2);
+            alert(`Длина строки: ${s.length}\nЛатинских букв: ${latinCount}\nДоля: ${percent}%`);
+        }
+
+        // f. Удаление повторных вхождений слов
+        function taskF() {
+            let s = prompt("Введите строку из слов, разделенных пробелами:");
+            if (s === null) return;
+
+            let words = s.split(/\s+/);
+            let uniqueWords = [];
+            let seen = new Set();
+
+            for (let word of words) {
+                if (!seen.has(word)) {
+                    seen.add(word);
+                    uniqueWords.push(word);
+                }
+            }
+
+            let result = uniqueWords.join(' ');
+            alert(`Исходная строка: "${s}"\nРезультат: "${result}"`);
+        }
+
+        // g. Массив случайных чисел
+        function taskG() {
+            let n = parseInt(prompt("Введите количество чисел n:"));
+            if (isNaN(n) || n < 1) {
+                alert("Ошибка: введите положительное число!");
+                return;
+            }
+
+            let arr = [];
+            for (let i = 0; i < n; i++) {
+                arr.push(Math.floor(Math.random() * 100));
+            }
+
+            let result = "Исходный массив:\n" + arr.join(' ') + "\n\n";
+            result += "В обратном порядке (по 5 в строке):\n";
+
+            let reversed = [...arr].reverse();
+            for (let i = 0; i < reversed.length; i += 5) {
+                result += reversed.slice(i, i + 5).join(' ') + "\n";
+            }
+
+            alert(result);
+        }
+
+        // h. Матрица с диагоналями
+        function taskH() {
+            let n = parseInt(prompt("Введите порядок матрицы n:"));
+            if (isNaN(n) || n < 2) {
+                alert("Ошибка: введите число больше 1!");
+                return;
+            }
+
+            let matrix = [];
+            for (let i = 0; i < n; i++) {
+                matrix[i] = [];
+                for (let j = 0; j < n; j++) {
+                    matrix[i][j] = Math.floor(Math.random() * 20) + 1;
+                }
+            }
+
+            let diagonalElements = [];
+            for (let i = 0; i < n; i++) {
+                diagonalElements.push(matrix[i][i]);
+                if (i !== n - 1 - i) {
+                    diagonalElements.push(matrix[i][n - 1 - i]);
+                }
+            }
+
+            let max = Math.max(...diagonalElements);
+            let min = Math.min(...diagonalElements);
+
+            for (let i = 0; i < n; i++) {
+                if (matrix[i][i] !== max && matrix[i][i] !== min) {
+                    matrix[i][i] = 0;
+                }
+                if (i !== n - 1 - i) {
+                    if (matrix[i][n - 1 - i] !== max && matrix[i][n - 1 - i] !== min) {
+                        matrix[i][n - 1 - i] = 0;
+                    }
+                }
+            }
+
+            let result = `Матрица ${n}x${n}:\n`;
+            for (let i = 0; i < n; i++) {
+                result += matrix[i].map(x => x.toString().padStart(3)).join(' ') + '\n';
+            }
+            result += `\nНаибольший элемент диагоналей: ${max}\nНаименьший: ${min}`;
+            alert(result);
+        }
+
+        // i. Прибавить n дней к дате
+        function taskI() {
+            let n = parseInt(prompt("Введите количество дней для добавления:"));
+            if (isNaN(n)) {
+                alert("Ошибка: введите число!");
+                return;
+            }
+
+            let currentDate = new Date();
+            let newDate = new Date(currentDate);
+            newDate.setDate(currentDate.getDate() + n);
+
+            alert(`Текущая дата: ${currentDate.toLocaleDateString()}\n+${n} дней: ${newDate.toLocaleDateString()}`);
+        }
+
+        // j. Месяцев до 1 сентября
+        function taskJ() {
+            let currentDate = new Date();
+            let targetDate = new Date(currentDate.getFullYear(), 8, 1);
+
+            if (currentDate > targetDate) {
+                targetDate = new Date(currentDate.getFullYear() + 1, 8, 1);
+            }
+
+            let months = (targetDate.getFullYear() - currentDate.getFullYear()) * 12 +
+                        (targetDate.getMonth() - currentDate.getMonth());
+
+            alert(`От ${currentDate.toLocaleDateString()} до 1 сентября осталось ${months} месяцев`);
+        }
+    </script>
+</body>
+</html>

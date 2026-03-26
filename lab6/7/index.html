@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Лаба 6 - Задание 7</title>
+</head>
+<body>
+    <ol id="list">
+        <li>Привет</li>
+        <li>Мир</li>
+    </ol>
+    
+    <button onclick="clearList()">Очистить список</button>
+
+    <script>
+        function clear(elem) {
+            elem.innerHTML = '';
+        }
+        
+        function clearList() {
+            let list = document.getElementById('list');
+            clear(list);
+            console.log('Список очищен');
+        }
+    </script>
+</body>
+</html>

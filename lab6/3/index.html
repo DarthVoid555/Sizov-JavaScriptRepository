@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Лаба 7 - Задание 3</title>
+</head>
+<body>
+    <div>Пользователи:</div>
+    <ul>
+        <li>Джон</li>
+        <li>Пит</li>
+    </ul>
+
+    <script>
+        let div = document.querySelector('div');
+        let ul = document.querySelector('ul');
+        let secondLi = document.querySelectorAll('li')[1];
+
+        document.write('<h3>Результаты:</h3>');
+        document.write('<p>div: ' + div.outerHTML + '</p>');
+        document.write('<p>ul: ' + ul.outerHTML + '</p>');
+        document.write('<p>второй li: ' + secondLi.outerHTML + ' (текст: ' + secondLi.textContent + ')</p>');
+    </script>
+</body>
+</html>

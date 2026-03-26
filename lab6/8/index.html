@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Лаба 6 - Задание 8</title>
+</head>
+<body>
+    <button onclick="createList()">Создать список</button>
+    
+    <h3>Список:</h3>
+    <ul id="list"></ul>
+
+    <script>
+        function createList() {
+            let count = prompt('Введите количество пунктов списка:', '3');
+            
+            if (count === null) {
+                alert('Операция отменена');
+                return;
+            }
+            
+            count = parseInt(count);
+            
+            if (isNaN(count) || count <= 0) {
+                alert('Пожалуйста, введите положительное число');
+                return;
+            }
+            
+            let ul = document.getElementById('list');
+            
+            ul.innerHTML = '';
+            
+            for (let i = 1; i <= count; i++) {
+                let text = prompt(`Введите содержимое пункта ${i}:`, `Пункт ${i}`);
+                
+                if (text === null) {
+                    alert('Создание списка прервано');
+                    ul.innerHTML = '';
+                    return;
+                }
+                
+                let li = document.createElement('li');
+                li.textContent = text;
+                
+                ul.appendChild(li);
+            }
+            
+            alert(`Список из ${count} пунктов создан!`);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>Лабораторная работа 6 - Задание 5</h1>
+    
+    <!-- Таблица 5x5 из задания 1 -->
+    <table id="myTable">
+        <tr>
+            <td>1:1</td><td>2:1</td><td>3:1</td><td>4:1</td><td>5:1</td>
+        </tr>
+        <tr>
+            <td>1:2</td><td>2:2</td><td>3:2</td><td>4:2</td><td>5:2</td>
+        </tr>
+        <tr>
+            <td>1:3</td><td>2:3</td><td>3:3</td><td>4:3</td><td>5:3</td>
+        </tr>
+        <tr>
+            <td>1:4</td><td>2:4</td><td>3:4</td><td>4:4</td><td>5:4</td>
+        </tr>
+        <tr>
+            <td>1:5</td><td>2:5</td><td>3:5</td><td>4:5</td><td>5:5</td>
+        </tr>
+    </table>
+
+    <script>
+        let table = document.getElementById('myTable');
+        let rows = table.getElementsByTagName('tr');
+        
+        for (let i = 0; i < rows.length; i++) {
+            let cells = rows[i].getElementsByTagName('td');
+            
+            for (let j = 0; j < cells.length; j++) {
+                let sum = (i + 1) + (j + 1);
+
+                if (sum % 2 === 0) {
+                    cells[j].style.backgroundColor = 'red';
+                    cells[j].style.color = 'white';
+                }
+            }
+        }
+        
+        console.log('Готово. Ячейки с четной суммой i+j выделены красным');
+    </script>
+</body>
+</html>
