@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Лаба 7, Задание 7</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Горизонтальные линии</h1>
+        <p style="text-align: center;">Выберите значения параметров, которые требуется изменить, и нажмите кнопку <strong>Выполнить</strong>.</p>
+        
+        <div class="control-panel">
+            <!-- Выравнивание -->
+            <div class="section">
+                <h3>Выравнивание</h3>
+                <div class="radio-group">
+                    <label><input type="radio" name="align" value="left" checked> LEFT</label>
+                    <label><input type="radio" name="align" value="center"> CENTER</label>
+                    <label><input type="radio" name="align" value="right"> RIGHT</label>
+                </div>
+            </div>
+            
+            <!-- Размеры -->
+            <div class="section">
+                <h3>Размеры</h3>
+                <div class="input-group">
+                    <label>толщина линии (size):</label>
+                    <input type="range" id="sizeSlider" min="1" max="20" value="5">
+                    <input type="number" id="sizeValue" min="1" max="20" value="5" style="width: 50px;">
+                    <span>px</span>
+                </div>
+                <div class="input-group">
+                    <label>длина линии (width):</label>
+                    <input type="range" id="widthSlider" min="100" max="600" value="400">
+                    <input type="number" id="widthValue" min="100" max="600" value="400" style="width: 60px;">
+                    <span>px</span>
+                </div>
+            </div>
+            
+            <!-- Цвет -->
+            <div class="section">
+                <h3>Цвет линии (color)</h3>
+                <div class="color-buttons">
+                    <div class="color-btn" style="background: teal; color: white;" onclick="setColor('teal')">teal</div>
+                    <div class="color-btn" style="background: green; color: white;" onclick="setColor('green')">green</div>
+                    <div class="color-btn" style="background: olive; color: white;" onclick="setColor('olive')">olive</div>
+                    <div class="color-btn" style="background: navy; color: white;" onclick="setColor('navy')">navy</div>
+                    <div class="color-btn" style="background: purple; color: white;" onclick="setColor('purple')">purple</div>
+                    <div class="color-btn" style="background: teal; color: white;" onclick="setColor('teal')">teal</div>
+                    <div class="color-btn" style="background: gray; color: white;" onclick="setColor('gray')">gray</div>
+                    <div class="color-btn" style="background: silver; color: black;" onclick="setColor('silver')">silver</div>
+                    <div class="color-btn" style="background: yellow; color: black;" onclick="setColor('yellow')">yellow</div>
+                    <div class="color-btn" style="background: blue; color: white;" onclick="setColor('blue')">blue</div>
+                    <div class="color-btn" style="background: fuchsia; color: white;" onclick="setColor('fuchsia')">fuchsia</div>
+                    <div class="color-btn" style="background: white; color: black; border: 1px solid #ccc;" onclick="setColor('white')">white</div>
+                </div>
+                <div class="input-group" style="margin-top: 10px;">
+                    <label>Или выберите цвет:</label>
+                    <input type="color" id="colorPicker" value="#4CAF50">
+                </div>
+            </div>
+            
+            <!-- Кнопки -->
+            <div style="text-align: center;">
+                <button onclick="applyChanges()">Выполнить</button>
+                <button class="reset-btn" onclick="resetChanges()">Обновить</button>
+            </div>
+        </div>
+        
+        <!-- Область предварительного просмотра -->
+        <div class="preview">
+            <h3>Предварительный просмотр:</h3>
+            <hr id="previewHr">
+        </div>
+    </div>
+
+    <script>
+        let hrElement = document.getElementById('previewHr');
+        
+        let currentAlign = 'left';
+        let currentSize = 5;
+        let currentWidth = 400;
+        let currentColor = '#4CAF50';
+        
+        let sizeSlider = document.getElementById('sizeSlider');
+        let sizeValue = document.getElementById('sizeValue');
+        let widthSlider = document.getElementById('widthSlider');
+        let widthValue = document.getElementById('widthValue');
+        
+        sizeSlider.addEventListener('input', function() {
+            sizeValue.value = sizeSlider.value;
+        });
+        
+        sizeValue.addEventListener('input', function() {
+            sizeSlider.value = sizeValue.value;
+        });
+        
+        widthSlider.addEventListener('input', function() {
+            widthValue.value = widthSlider.value;
+        });
+        
+        widthValue.addEventListener('input', function() {
+            widthSlider.value = widthValue.value;
+        });
+
+        function setColor(color) {
+            currentColor = color;
+            document.getElementById('colorPicker').value = color;
+            applyChanges();
+        }
+        
+        function applyChanges() {
+            let alignRadios = document.getElementsByName('align');
+            for (let radio of alignRadios) {
+                if (radio.checked) {
+                    currentAlign = radio.value;
+                    break;
+                }
+            }
+
+            currentSize = parseInt(sizeSlider.value);
+            currentWidth = parseInt(widthSlider.value);
+
+            currentColor = document.getElementById('colorPicker').value;
+            
+            hrElement.style.height = currentSize + 'px';
+            hrElement.style.width = currentWidth + 'px';
+            hrElement.style.backgroundColor = currentColor;
+            hrElement.style.border = 'none';
+            
+            if (currentAlign === 'left') {
+                hrElement.style.margin = '20px 0';
+                hrElement.style.marginLeft = '0';
+                hrElement.style.marginRight = 'auto';
+            } else if (currentAlign === 'center') {
+                hrElement.style.margin = '20px auto';
+            } else if (currentAlign === 'right') {
+                hrElement.style.margin = '20px 0';
+                hrElement.style.marginLeft = 'auto';
+                hrElement.style.marginRight = '0';
+            }
+        }
+        
+        function resetChanges() {
+            document.querySelector('input[value="left"]').checked = true;
+            currentAlign = 'left';
+            
+            sizeSlider.value = 5;
+            sizeValue.value = 5;
+            currentSize = 5;
+            
+            widthSlider.value = 400;
+            widthValue.value = 400;
+            currentWidth = 400;
+            
+            currentColor = '#4CAF50';
+            document.getElementById('colorPicker').value = '#4CAF50';
+            
+            applyChanges();
+        }
+        
+        applyChanges();
+    </script>
+</body>
+</html>

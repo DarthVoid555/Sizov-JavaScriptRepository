@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Лаба 7, Задание 6</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Введите начисленную зарплату за следующие месяцы</h2>
+        
+        <form id="salaryForm">
+            <div class="month-input">
+                <label>Январь:</label>
+                <input type="number" id="jan" value="45000" step="1000">
+            </div>
+            <div class="month-input">
+                <label>Февраль:</label>
+                <input type="number" id="feb" value="48000" step="1000">
+            </div>
+            <div class="month-input">
+                <label>Март:</label>
+                <input type="number" id="mar" value="47000" step="1000">
+            </div>
+            <div class="month-input">
+                <label>Апрель:</label>
+                <input type="number" id="apr" value="50000" step="1000">
+            </div>
+            <div class="month-input">
+                <label>Май:</label>
+                <input type="number" id="may" value="52000" step="1000">
+            </div>
+            <div class="month-input">
+                <label>Июнь:</label>
+                <input type="number" id="jun" value="49000" step="1000">
+            </div>
+            
+            <button type="button" onclick="calculateAverage()">Вычислить</button>
+            
+            <div class="result">
+                <label>Средняя зарплата:</label>
+                <input type="text" id="averageResult" readonly>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function calculateAverage() {
+            let jan = parseFloat(document.getElementById('jan').value) || 0;
+            let feb = parseFloat(document.getElementById('feb').value) || 0;
+            let mar = parseFloat(document.getElementById('mar').value) || 0;
+            let apr = parseFloat(document.getElementById('apr').value) || 0;
+            let may = parseFloat(document.getElementById('may').value) || 0;
+            let jun = parseFloat(document.getElementById('jun').value) || 0;
+
+            let sum = jan + feb + mar + apr + may + jun;
+
+            let average = sum / 6;
+
+            document.getElementById('averageResult').value = average.toFixed(2);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Лаба 7, Задание 1</title>
+</head>
+<body>
+    <div id="text">Этот элемент исчезнет при нажатии на кнопку!</div>
+    <button onclick="hideElement()">Скрыть элемент</button>
+
+    <script>
+        function hideElement() {
+            let element = document.getElementById('text');
+            element.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
